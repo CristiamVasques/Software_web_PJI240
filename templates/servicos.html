@@ -1,0 +1,11 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+    <h2>Serviços solicitados</h2>
+
+    <ul style="font-size: 18px">
+        {% for servico in servicos %}
+            <li>{{ servico.servico }} - {{ servico.nome_completo }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
