@@ -8,7 +8,7 @@
 
     <ul style="font-size: 18px">
         {% for servico in servicos %}
-            <li>{{ servico.servico }} - {{ servico.nome_completo }}</li>
+            <li>{{ servico.servico }} - {{ servico.nome_completo }} - {{ servico.status}}</li>
         {% endfor %}
     </ul>
 {% endblock %}

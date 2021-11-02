@@ -13,6 +13,9 @@ class Servico(models.Model):
     descricao = models.TextField(blank=True, null=True)
     data_criacao= models.DateTimeField(auto_now=True, verbose_name='Solicitado')
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, default='Pendente')
+
+
 
     class Meta:
         db_table = 'servico'

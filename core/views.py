@@ -33,3 +33,4 @@ def submit_solicitacao(request):
                                servico=servico,
                                usuario=usuario)
     return redirect('/accounts/profile/')
+
