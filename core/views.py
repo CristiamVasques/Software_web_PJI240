@@ -34,3 +34,26 @@ def submit_solicitacao(request):
                                usuario=usuario)
     return redirect('/accounts/profile/')
 
+@login_required(login_url='/login/')
+def manutencao(request):
+    return render(request, 'manutencao.html')
+
+@login_required(login_url='/login/')
+def submit_manutencao(request):
+    if request.POST:
+        nome_completo = request.POST.get('nome_completo')
+        empresa = request.POST.get('empresa')
+        telefone = request.POST.get('telefone')
+        email = request.POST.get('email')
+        prioridade = request.POST.get('prioridade')
+        servico = request.POST.get('servico')
+        usuario = request.user
+        Servico.objects.create(nome_completo=nome_completo,
+                               empresa=empresa,
+                               telefone=telefone,
+                               email=email,
+                               prioridade=prioridade,
+                               servico=servico,
+                               usuario=usuario)
+    return redirect('/accounts/profile/')
+

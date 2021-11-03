@@ -1,14 +1,111 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Serviços solicitados</h2>
     <a href="solicitacao/">
         <button type="button">Solicitar Serviço</button>
     </a>
 
-    <ul style="font-size: 18px">
-        {% for servico in servicos %}
-            <li>{{ servico.servico }} - {{ servico.nome_completo }} - {{ servico.status}}</li>
-        {% endfor %}
-    </ul>
+    <a href="manutencao/">
+        <button type="button">Solicitar Manutenção</button>
+    </a>
+    <br><br>
+
+    <h2>Serviços solicitados</h2>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>Nome</th>
+                <th>Empresa</th>
+                <th>Prioridade</th>
+                <th>Serviço</th>
+                <th>Data Criação</th>
+                <th>Status</th>
+            </tr>
+            <ul style="font-size: 18px">
+                {% for servico in servicos %}
+                    {% if servico.status == 'Pendente' and servico.servico != 'Manutenção' %}
+                        <tr>
+                            <td>{{ servico.nome_completo }}</td>
+                            <td>{{ servico.empresa }}</td>
+                            <td>{{ servico.prioridade }}</td>
+                            <td>{{ servico.servico }}</td>
+                            <td>{{ servico.data_criacao }}</td>
+                            <td>{{ servico.status}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </table>
+    </div>
+    <br>
+
+
+ <h2>Serviços de Manutenção</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>Nome</th>
+                <th>Empresa</th>
+                <th>Prioridade</th>
+                <th>Serviço</th>
+                <th>Data Criação</th>
+                <th>Status</th>
+            </tr>
+            <ul style="font-size: 18px">
+                {% for servico in servicos %}
+                    {% if servico.status == 'Pendente' and servico.servico == 'Manutenção' %}
+                        <tr>
+                            <td>{{ servico.nome_completo }}</td>
+                            <td>{{ servico.empresa }}</td>
+                            <td>{{ servico.prioridade }}</td>
+                            <td>{{ servico.servico }}</td>
+                            <td>{{ servico.data_criacao }}</td>
+                            <td>{{ servico.status}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </table>
+    </div>
+    <br>
+
+
+    <h2>Serviços Concluídos</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>Nome</th>
+                <th>Empresa</th>
+                <th>Prioridade</th>
+                <th>Serviço</th>
+                <th>Data Criação</th>
+                <th>Status</th>
+            </tr>
+            <ul style="font-size: 18px">
+                {% for servico in servicos %}
+                    {% if servico.status == 'Concluído' %}
+                        <tr>
+                            <td>{{ servico.nome_completo }}</td>
+                            <td>{{ servico.empresa }}</td>
+                            <td>{{ servico.prioridade }}</td>
+                            <td>{{ servico.servico }}</td>
+                            <td>{{ servico.data_criacao }}</td>
+                            <td>{{ servico.status}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </table>
+    </div>
+    <br>
+
+
+
+
+
+
 {% endblock %}

@@ -24,4 +24,6 @@ urlpatterns = [
     path('accounts/profile/', views.lista_servicos),
     path('accounts/profile/solicitacao/', views.solicitacao),
     path('accounts/profile/solicitacao/submit', views.submit_solicitacao),
+    path('accounts/profile/manutencao/', views.manutencao),
+    path('accounts/profile/manutencao/submit', views.submit_manutencao),
 ]
