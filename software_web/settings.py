@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -143,11 +144,22 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 ACCOUNT_SESSION_REMEMBER = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Provedor de emails
+
+#EMAIL_BACKEND = 'anymal.backends.mailgun.EmailBackend'
+#DEFAULT_FROM_EMAIL = 'no-reply@meusite.com'
+#SERVER_EMAIL = DEFAULT_FROM_EMAIL
+#ANYMAIL = {
+    #'MAILGUN_API_KEY': '1f253da44b553e1791adb7a7a13bfbf6-30b9cd6d-461d86dc',
+    #'MAILGUN_SENDER_DOMAIN': 'sandbox171c28ac40c6400980e7043434e2e09f.mailgun.org?',
+#}
 
 
 # django-crispy-forms
