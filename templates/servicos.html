@@ -54,6 +54,7 @@
                 <th>Data Criação</th>
                 <th>Status</th>
             </tr>
+
             <ul style="font-size: 18px">
                 {% for servico in servicos %}
                     {% if servico.status == 'Pendente' and servico.servico == 'Manutenção' %}
@@ -65,6 +66,7 @@
                             <td>{{ servico.data_criacao }}</td>
                             <td>{{ servico.status}}</td>
                         </tr>
+
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -85,6 +87,7 @@
                 <th>Data Criação</th>
                 <th>Status</th>
             </tr>
+
             <ul style="font-size: 18px">
                 {% for servico in servicos %}
                     {% if servico.status == 'Concluído' %}
@@ -96,6 +99,7 @@
                             <td>{{ servico.data_criacao }}</td>
                             <td>{{ servico.status}}</td>
                         </tr>
+
                     {% endif %}
                 {% endfor %}
             </ul>
