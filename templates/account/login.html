@@ -5,11 +5,11 @@
 {% block title %}Entrar{% endblock %}
 
 {% block content %}
-    <h2>Entrar</h2>
+    <h4>Acesso ao Sistema Tecsystem</h4>
     <form method="post">{% csrf_token %}
         {{ form|crispy }}
         <a href="{% url 'account_reset_password' %}">Esqueceu a senha?</a>
         <br><br>
-        <button class="btn btn-success" type="submit">Entrar</button>
+        <button class="btn btn-success" type="submit" title="clique aqui para entrar no sistema" aria-label="clique aqui para entrar no sistema">Entrar</button>
     </form>
 {% endblock %}

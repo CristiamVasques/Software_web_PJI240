@@ -1,139 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
+    {% extends 'base.html' %}
+
+    {% block title %}Tecsystem Telecom{% endblock %}
+    
+    {% block content %}
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Integrado para Otimização, Cadastro e Emissão de ordens de serviço técnico e comercial.| Tecsystem Telecom </title>
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
-            background-image: linear-gradient(to right, rgba(3, 64, 24, 0.5), rgb(3, 64, 24));
-        }
-        .box{
-            color: white;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 15px;
-            width: 20%;
-        }
-        fieldset{
-            border: 3px solid green;
-        }
-        legend{
-            border: 1px solid green;
-            padding: 10px;
-            text-align: center;
-            background-color: green;
-            border-radius: 8px;
-        }
-        .inputBox{
-            position: relative;
-        }
-        .inputUser{
-            background: none;
-            border: none;
-            border-bottom: 1px solid white;
-            outline: none;
-            color: white;
-            font-size: 10px;
-            width: 100%;
-            letter-spacing: 2px;
-        }
-        .labelInput{
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            pointer-events: none;
-            transition: .5s;
-        }
-        .inputUser:focus ~ .labelInput,
-        .inputUser:valid ~ .labelInput{
-            top: -20px;
-            font-size: 10px;
-            color: green;
-        }
-        #level{
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 12px;
-            outline: none;
-            font-size: 12px;
-        }
-        #tecnologia{
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 12px;
-            outline: none;
-            font-size: 12px;
-        }
-        #mensagem{
-            border: none;
-            padding: 12px;
-            width: 90%;
-            height: 30px;
-            border-radius: 12px;
-            outline: none;
-            font-size: 12px;
-        }
-        #submit{
-            background-image: linear-gradient(to right,rgba(3, 64, 24, 0.5), rgb(3, 64, 24));
-            width: 100%;
-            border: none;
-            padding: 15px;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-        #submit:hover{
-            background-image: linear-gradient(to right,rgb(3, 64, 24), rgba(3, 64, 24 , 0.5));
+    
+    <script>
+
+        const limparFormulario = (endereco) =>{
+            document.getElementById('endereco').value = '';
+            document.getElementById('bairro').value = '';
+            document.getElementById('cidade').value = '';
+            document.getElementById('estado').value = '';
         }
 
-    </style>
-</head>
+        const preencherFormulario = (endereco) =>{
+            document.getElementById('endereco').value = endereco.logradouro;
+            document.getElementById('bairro').value = endereco.bairro;
+            document.getElementById('cidade').value = endereco.localidade;
+            document.getElementById('estado').value = endereco.uf;
+        }
+
+        const cepValido = (cep) => cep.length == 8 && /^[0-9]+$/.test(cep);
+
+        const pesquisarCep = async() => {
+            limparFormulario();
+
+            const cep = document.getElementById('cep').value;
+            const url = `https://viacep.com.br/ws/${cep}/json/`;
+            if (cepValido(cep)){
+                const response = await fetch(url);
+                const endereco = await response.json();
+                if (endereco.hasOwnProperty('erro')){
+                alert('CEP não encontrado!');
+                }else{
+                preencherFormulario(endereco);
+                }
+            }else{
+                alert('CEP incorreto!');
+            }
+
+        }
+
+        document.getElementById('cep')
+                .addEventListener('focusout',pesquisarCep);    
+
+    </script>
 <body>
-    <div class = "barra">
-        <div style="text align: left;">
-            <a href>
-                <img src="https://www.tecsystemtelecom.com.br/attachments/Logo/Original-on-Transparent_13.png" alt="" width="250" height="94">
-            </a>
-        </div>
-    </div>
     <div class="box">
         <form action="submit" method="POST">{% csrf_token %}
             <fieldset>
-                <legend><b>Abertura de Manutenção</b></legend>
+                <legend><b>Solicitação de Manutenção</b></legend>
                 <br>
+
                 <div class="inputBox">
                     <input type="text" name="nome_completo" id="nome" class="inputUser" required>
                     <label for="nome" class="labelInput">Nome completo</label>
                 </div>
                 <br><br>
+
                 <div class="inputBox">
                     <input type="text" name="empresa" id="empresa" class="inputUser" required>
                     <label for="empresa" class="labelInput">Empresa</label>
                 </div>
                 <br><br>
+
                 <div class="inputBox">
-                    <input type="tel" name="telefone" id="telefone" class="inputUser" required>
-                    <label for="telefone" class="labelInput">Telefone</label>
+                    <input type="text" name="cep" id="cep" class="inputUser" onblur="pesquisarCep()"  required>
+                    <label for="cep" class="labelInput">CEP</label>
+                </div>
+                <br><br> 
+
+                 <div class="inputBox">
+                    <input type="text" name="endereco" id="endereco" class="inputUser" required>
+                    <label for="endereco" class="labelInput">Endereço</label>
+                </div>
+                <br><br> 
+
+                <div class="inputBox">
+                    <input type="text" name="numero" id="numero" class="inputUser" required>
+                    <label for="numero" class="labelInput">Número</label>
+                </div> 
+                <br><br> 
+
+                <div class="inputBox">
+                    <input type="text" name="bairro" id="bairro" class="inputUser" required>
+                    <label for="bairro" class="labelInput">Bairro</label>
                 </div>
                 <br><br>
+
                 <div class="inputBox">
-                    <input type="text" name="email" id="email" class="inputUser" required>
-                    <label for="email" class="labelInput">E-mail</label>
+                    <input type="text" name="cidade" id="cidade" class="inputUser" required>
+                    <label for="cidade" class="labelInput">Cidade</label>
                 </div>
                 <br><br>
+
+                <div class="inputBox">
+                    <input type="text" name="estado" id="estado" class="inputUser" required>
+                    <label for="estado" class="labelInput">Estado</label>
+                </div>
+                <br><br>
+                
                 <label for="prioridade">Nível de Prioridade do chamado:</label>
                 <br><br>
+
                 <div class="inputBox">
                 <select id="level" name="prioridade">
                     <option value="quest">Questionamento</option>
@@ -144,29 +122,28 @@
                 </select>
                  </div>
                  <br><br>
-                <label for="tecnologia">Selecione a Tecnologia:</label>
+
+                <label for="tecnologia">Selecione o tópico:</label>
                 <br><br>
                 <div class="inputBox">
                 <select id="tecnologia" name="servico">
-                    <option value="Solução 3cx">Solução 3CX</option>
-                    <option value="Alcatel-Lucent">Alcatel-Lucent</option>
-                    <option value="GrandStream">GrandStream</option>
-                    <option value="Videoconfêrencia">Videoconfêrencia</option>
-                    <option value="Segurança Cibernética">Segurança Cibernética</option>
-                    <option value="Locação Soluções SIP">Locação Soluções SIP</option>
                     <option value="Manutenção">Manutenção</option>
+                    <option value="Info">Informação / Dúvidas</option>
                 </select>
                  </div>
                 <br><br>
+
                 <div class="inputBox">
                 <label for="mensagem">Por favor, descreva a questão de maneira detalhada:</label>
                 <input type="textarea" name="mensagem" id="mensagem" rows="10" cols="30" required>
                  </div>
                 <br><br>
-                <input type="submit" name="submit" id="submit">
+
+                <input type="submit" value="Enviar" name="Enviar" id="submit">
                 <br><br>
+
                 <a href="/accounts/profile/">
-                    <button type="button">Cancelar</button>
+                    <button type="button" class="btn btn-outline-danger">Cancelar</button>
                 </a>
 
             </fieldset>
@@ -174,3 +151,4 @@
     </div>
 </body>
 </html>
+{% endblock %}

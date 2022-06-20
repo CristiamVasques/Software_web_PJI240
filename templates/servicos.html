@@ -1,20 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="solicitacao/">
-        <button type="button">Solicitar Serviço</button>
-    </a>
-
-    <a href="manutencao/">
-        <button type="button">Solicitar Manutenção</button>
-    </a>
-    <br><br>
-
-    <h2>Serviços solicitados</h2>
-
-
+<br>
+    <h4>Solicitações Comerciais</h4>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="w3-table-all w3-hoverable">
             <tr>
                 <th>Nome</th>
                 <th>Empresa</th>
@@ -40,12 +30,19 @@
         </table>
     </div>
     <br>
+    <a href="solicitacao/">
+        <button type="button" class="btn btn-dark btn-lg btn-block" aria-label="clique aqui para iniciar uma nova solicitação de serviços comercial" title="clique aqui para iniciar uma nova solicitação de serviços comercial">Nova Solicitação Comercial</button>
+    </a>
 
-
- <h2>Serviços de Manutenção</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+   
+ <h4>Solicitações de Manutenção</h4>
 
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="w3-table-all w3-hoverable">
             <tr>
                 <th>Nome</th>
                 <th>Empresa</th>
@@ -73,12 +70,15 @@
         </table>
     </div>
     <br>
-
-
-    <h2>Serviços Concluídos</h2>
+    <a href="manutencao/">
+        <button type="button" class="btn btn-dark btn-lg btn-block" aria-label="clique aqui para iniciar uma nova solicitação de manutenção" title="clique aqui para iniciar uma nova solicitação de manutenção">Nova solicitação de Manutenção</button>
+    </a>
+    <br>
+    <br>
+    <h4>Serviços Concluídos</h4>
 
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="w3-table-all w3-hoverable">
             <tr>
                 <th>Nome</th>
                 <th>Empresa</th>

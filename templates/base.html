@@ -5,32 +5,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Sistema Integrado para Otimização, Cadastro e Emissão de ordens de serviço técnico e comercial.| Tecsystem Telecom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            background-image: linear-gradient(to right, rgba(3, 64, 24, 0.5), rgb(3, 64, 24));
+        }
+        .box{
+            color: white;
+            position: relative;
+            top: 500px;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 15px;
+            width: 55%;
+        }
+        .barra{
+            color: green;
+            position: top;
+            top: 100%;
+            left: 100%;
+            transform: translate(-50%,-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 15px;
+            width: 20%;
+        }
+        fieldset{
+            border: 3px solid green;
+            border-radius: 12px;
+            padding: 5px;
+        }
+        legend{
+            border: 1px solid green;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            background-color: rgba(0, 128, 0, 0.514);
+            border-radius: 8px;
+        }
+        .inputBox{
+            position: relative;
+        }
+        .inputUser{
+            background: none;
+            border: none;
+            border-bottom: 1px solid white;
+            outline: none;
+            color: white;
+            font-size: 10px;
+            width: 100%;
+            letter-spacing: 2px;
+        }
+        .labelInput{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            pointer-events: none;
+            transition: .5s;
+        }
+        .inputUser:focus ~ .labelInput,
+        .inputUser:valid ~ .labelInput{
+            top: -20px;
+            font-size: 10px;
+            color: green;
+        }
+        #level{
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 12px;
+            outline: none;
+            font-size: 12px;
+        }
+        #tecnologia{
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 12px;
+            outline: none;
+            font-size: 12px;
+        }
+        #mensagem{
+            border: none;
+            padding: 12px;
+            width: 100%;
+            height: 100px;
+            border-radius: 12px;
+            outline: none;
+            font-size: 12px;
+        }
+        #submit{
+            background-image: linear-gradient(to right,rgba(3, 64, 24, 0.5), rgb(3, 64, 24));
+            width: 100%;
+            border: none;
+            padding: 15px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        #submit:hover{
+            background-image: linear-gradient(to right,rgb(3, 64, 24), rgba(3, 64, 24 , 0.5));
+        }
+
+    </style>
 </head>
+<header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar navbar-light" style="background-color: rgb(7, 93, 37);">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <p style="color:rgb(0, 0, 0);"><img src="https://www.tecsystemtelecom.com.br/attachments/Logo/Original-on-Transparent_13.png" width="162" height="61" alt="imagem do logo da Tecsystem Telecom">
+                Sistema de Abertura de Chamados Comerciais e Técnicos da Tecsystem Telecom</p>
+            </a>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="btn btn-outline-warning" button type="button" title="clique aqui para ir para a página principal" aria-label="clique aqui para ir para a página principal" href="/accounts/profile/">Página Principal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" button type="button" title="clique aqui para ir para sair do sistema" aria-label="clique aqui para ir para sair do sistema"  href="{% url 'account_logout' %}">Sair</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="btn btn-outline-success" button type="button" title="clique aqui para ir para acessar o sistema com as suas credenciais" aria-label="clique aqui para ir para acessar o sistema com as suas credenciais"href="{% url 'account_login' %}">Acesso</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-warning" button type="button" title="clique aqui para ir para a tela de cadastro" aria-label="clique aqui para ir para a tela de cadastro" href="{% url 'account_signup' %}">Cadastro</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand navbar-dark bg-dark mb-3">
-            <div class="container">
-                <h3 class="container"> Tecsystem Telecom</h3>
-                <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Cadastro</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </header>
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <main class="container">
         {% block content %}
         {% endblock %}
