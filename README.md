@@ -1,5 +1,5 @@
 # *Software_web para abertura de chamados* 
-Apresentado no Projeto Integrador I (2021 9º e 10º bimestres) - UNIVESP
+Apresentado no Projeto Integrador I (2022 9º e 10º bimestres) - UNIVESP
 
 Atualizado com recurso de acessibilidade e API no Projeto Integrador II (2022 9º e 10º bimestres) - UNIVESP
 
